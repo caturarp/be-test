@@ -8,6 +8,9 @@ import helmet from "helmet";
 import {config as dotenv} from "dotenv";
 import { sequelize } from './instance/sequelize';
 import models from "./db/models/Index";
+import UserController from "@service/user/UserController";
+import AuthController from "@service/auth/AuthController";
+import PostController from "@service/post/PostController";
 
 export class App {
     public app: Application;
@@ -29,24 +32,10 @@ export class App {
     }
     protected routes(): void {
 
-        // this.app.use("/users",  UserController);
-        // this.app.use("/auth", AuthController);
-        // this.app.use("/roles", RoleController);
-        // this.app.use("/teams", TeamController);
-        // this.app.use("/methodologies", MethodologyController);
-        // this.app.use("/cards", CardController);
-        // this.app.use("/lists", ListController);
-        // this.app.use("/boards", BoardController);
-        // this.app.use("/login", BoardController);
-
-        // gmail auth routes
-        // this.app.use('/', authRoutes)
-
-        // auth middleware for api routes
-        // this.app.use(authMiddleware)
-
-        // gmail api routes
-        // this.app.use('/api', apiRoutes)
+        this.app.use("/auth/login",  AuthController);
+        this.app.use("/auth", UserController);
+        this.app.use("/user", UserController);
+        this.app.use("/post", PostController);
         
     }
     protected async connectDB(): Promise<void> {

@@ -1,6 +1,6 @@
-import {AuthMiddleware as auth} from "../../middleware/AuthMiddleware";
+// import {AuthMiddleware as auth} from "../../middleware/AuthMiddleware";
 import { Router, Request, Response } from "express";
-import BaseController from "../api/BaseController";
+import BaseController from "../base/BaseController";
 // import UserService
 import UserService from "./PostService";
 import * as authentication from "@service/auth/AuthService";

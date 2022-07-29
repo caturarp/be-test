@@ -32,23 +32,47 @@ class PostService implements IService {
               
     }
     show = async (req: Request , res: Response ): Promise<Response> => {
-        const {limit} = req.body;
-        query: req.query
-        Post.findAll({
-            limit: limit, 
-            where: {search: query.search},
-                tag: {
-                    [Op.or]: [].concat(req.query.tag)
-                  }},
-            include: [User] })
-            .then(posts => res.status(200).json(posts)
-            ).catch(next)
-
-        if(!person){
-            return res.status(404).send(`Post tidak ditemukan`);
+        //show by id
+        const {id} = req.params;
+        let post = await Post.findOne({
+            where: { id }
+        });
+        if(!post){
+            return res.status(404).send(`Data not found.`);
         }
+        try {
+            return res.status(200).json({
+                success: 'true',
+                message: "Successfully Get Post",
+                data: post
+            }) 
+        } catch (err) {
+            return res.status(500).json({
+                success: 'false',
+                message: err,
+                data: null
+                })
+        }
+        //show by keywoard
+        // const {limit} = req.body;
+        // query: req.query
+        // the required keyword search still not finished
+        
+        // Post.findAll({
+        //     limit: limit, 
+        //     where: {search: query.search},
+        //         tag: {
+        //             [Op.or]: [].concat(req.query.tag)
+        //           }},
+        //     include: [User] })
+        //     .then(posts => res.status(200).json(posts)
+        //     ).catch(next)
 
-        return res.status(200).send(person) ;
+        // if(!person){
+        //     return res.status(404).send(`Post tidak ditemukan`);
+        // }
+
+        return res.status(200).send('ok') ;
     }
     update = async (req: Request , res: Response ): Promise<Response> => {
         const { id } = req.params;

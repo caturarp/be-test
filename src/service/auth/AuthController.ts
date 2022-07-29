@@ -5,8 +5,8 @@ import {auth} from "../../middleware/auth"
 
 class AuthController extends BaseController{
     public routes(): void{
-        this.router.get("/", AuthService.signup);
-        this.router.get("/:id", auth, AuthService.signin);
+        // this.router.get("/", AuthService.signup);
+        this.router.get("/", auth, AuthService.signin);
     }
 }
 
